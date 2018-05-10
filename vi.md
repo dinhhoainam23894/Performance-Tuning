@@ -1,13 +1,13 @@
 
 [Source](https://www.percona.com/blog/2016/10/12/mysql-5-7-performance-tuning-immediately-after-installation/ "Permalink to MySQL 5.7 Performance Tuning Immediately After Installation")
 
-# Hiệu chỉnh ngay sau khi cài đặt MySQL 5.7 
+# Điều chỉnh hiệu năng ngay sau khi cài đặt MySQL 5.7 
 
-Bài viết này cập nhật thêm về [Blog của Stephane Combaudon về điều chỉnh hiệu suất của MySQL][1], và bao gồm cả điều chỉnh hiệu suất của MySQL 5.7 sau khi cài đặt.
+Bài viết này cập nhật thêm về [Blog của Stephane Combaudon về điều chỉnh hiệu năng của MySQL][1], và bao gồm cả điều chỉnh hiệu năng của MySQL 5.7 sau khi cài đặt.
 
 Một vài năm trước, Stephane Combaudon đã viết 1 bài blog đăng trên [Ten MySQL performance tuning settings after installation ][1] cho các phiên bản cũ hơn của MySQL như: 5.1, 5.5 và 5.6. Trong bài viết này, tôi sẽ xem qua những gì cần điều chỉnh trong phiên bản MySQL 5.7 (tập trung vào InnoDB).
 
-Tin vui là phiên bản MySQL 5.7 có những giá trị mặc định tốt hơn đáng kể. Morgan Tocker đã tạo một [trang có danh sách đầy đủ các tính năng trong MySQL 5.7][2], và nó là một điểm để tham chiếu tuyệt vời. Ví dụ, các biến sau được cài đặt _mặc định_:
+Tin vui là phiên bản MySQL 5.7 có những giá trị mặc định tốt hơn đáng kể. Morgan Tocker đã tạo một [trang có danh sách đầy đủ các tính năng trong MySQL 5.7][2], và sẽ là 1 nơi tham khảo tuyệt vời. Ví dụ, các biến sau được cài đặt _mặc định_:
 * innodb_file_per_table=ON
 * innodb_stats_on_metadata = OFF
 * innodb_buffer_pool_instances = 8 (or 1 if innodb_buffer_pool_size < 1GB)
@@ -47,7 +47,7 @@ Mô tả:
 
 _**Tiếp theo là gì?**_
 
-Đây là những điểm tốt nhất cho bất kỳ một cài đặt mới nào.Đây là những biến khác mà có thể tăng hiệu suất cho MySQL cho một vài việc. Thông thường, Tôi sẽ thiết lập công cụ theo dõi/công cụ ghi đồ thị (ví dụ, [Nền tảng quản lý và giám sát Percona][3]) và sau đó kiểm tra bảng điều khiển của MySQL để thực hiện thêm các hiệu chỉnh.
+Đây là những điểm tốt nhất cho bất kỳ một cài đặt mới nào.Đây là những biến khác mà có thể tăng hiệu năng cho MySQL cho một vài việc. Thông thường, Tôi sẽ thiết lập công cụ theo dõi/công cụ ghi đồ thị (ví dụ, [Nền tảng quản lý và giám sát Percona][3]) và sau đó kiểm tra bảng điều khiển của MySQL để thực hiện thêm các hiệu chỉnh.
 
 _**Chúng ta có thể điều chỉnh thêm những gì dựa trên các đồ thị?**_
 
@@ -63,7 +63,7 @@ _Kích thước file log của InnoDB._ Nhìn vào đồ thị sau:
 
 ![MySQL 5.7 Performance Tuning][6]
 
-Như chúng ta có thể thấy, InnoDB thường ghi khoảng 2.26 GB data mỗi giờ, vượt quá tổng kích thước của các file log (2G). chúng ta có thể tăng biến innodb_log_file_size và khởi động lại MySQL. Một cách khác, sử dụng "hiển thị trạng thái của InnoDB" để [tính toán kích thước file log tốt nhất cho InnoDB][7].
+Như chúng ta có thể thấy, InnoDB thường ghi khoảng 2.26 GB dữ liệu mỗi giờ, vượt quá tổng kích thước của các file log (2G). chúng ta có thể tăng biến innodb_log_file_size và khởi động lại MySQL. Một cách khác, sử dụng "hiển thị trạng thái của InnoDB" để [tính toán kích thước file log tốt nhất cho InnoDB][7].
 
 _**Các biến khác**_
 
